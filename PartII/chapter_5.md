@@ -85,7 +85,7 @@ T> There are many ways of creating arrays, and in SuperCollider the syntax for c
     // h) or simply this way:
     sum({arg i; i.postln;}!5);
 
-Above we created a Saw wave which contains harmonics up to the [Nyquist rate] (http://en.wikipedia.org/wiki/Nyquist_rate), which is half of the sample rate SuperCollider is running. The Saw UGen is "band-limited" which means that it does not alias and mirror back into the audible range. (Compare with LFSaw which will alias - you can both hear and see the harmonics mirror back into the audio range).
+Above we created a Saw wave which contains harmonics up to the [Nyquist rate](http://en.wikipedia.org/wiki/Nyquist_rate), which is half of the sample rate SuperCollider is running. The Saw UGen is "band-limited" which means that it does not alias and mirror back into the audible range. (Compare with LFSaw which will alias - you can both hear and see the harmonics mirror back into the audio range).
 
     {Saw.ar(MouseX.kr(100, 1000))}.freqscope
     {LFSaw.ar(MouseX.kr(100, 1000))}.freqscope
@@ -254,7 +254,7 @@ Generating a SynthDef using a non-deterministic algorithms (such as random) in t
 Another way of generating this bell sound would be to use the SynthDef from last tutorial, but here adding a duration to the envelope:
 
     (
-    SynthDef(\sine, {arg freq=333, amp=0.4, dur, pan=0.0;
+    SynthDef(\stereosineWenv, {arg freq=333, amp=0.4, dur, pan=0.0;
     	var signal, env;
     	env = EnvGen.ar(Env.perc(0.01, dur), doneAction:2);
     	signal = SinOsc.ar(freq, 0, amp) * env;
@@ -311,7 +311,7 @@ In additive synthesis, people often analyse the sound they're trying to synthesi
 
 ![A spectrogram of a xylophone sound](images/ch5_xylophone.png)
 
-The information the spectrogram gives us is three dimensional. It shows us the frequencies present in the sound on the vertical x-axis, the time on the horizontal y-axis, and amplitude is color (which we could imagine as the z-axis). We see that the partials don't have the same type of envelopes: some have strong attack, others come smoothly in; some have much amplitude, others less; some have a long duration whilst other have less; and of them vibrate in frequency. These parameters can mix. A loud partial could die out quickly while a soft one can live for a long time.
+The information the spectrogram gives us is three dimensional. It shows us the frequencies present in the sound on the x-axis, the time on the y-axis, and amplitude is color (which we could imagine as the z-axis). We see that the partials don't have the same type of envelopes: some have strong attack, others come smoothly in; some have much amplitude, others less; some have a long duration whilst other have less; and of them vibrate in frequency. These parameters can mix. A loud partial could die out quickly while a soft one can live for a long time.
 
 
     { ({ SinOsc.ar(rrand(180, 1200), 0.5*pi, 0.1) // the partial
@@ -321,13 +321,14 @@ The information the spectrogram gives us is three dimensional. It shows us the f
     } ! 12).sum }.play
 
 Analysing the bell above we can detect the following partials
-* partial 1: xxx Hz, x sec. long, with amplitude of ca. x
-* partial 2: xxx Hz, x sec. long, with amplitude of ca. x
-* partial 3: xxx Hz, x sec. long, with amplitude of ca. x
-* partial 4: xxx Hz, x sec. long, with amplitude of ca. x
-* partial 5: xxx Hz, x sec. long, with amplitude of ca. x
-* partial 6: xxx Hz, x sec. long, with amplitude of ca. x
-* partial 7: xxx Hz, x sec. long, with amplitude of ca. x
+
+1. xxx Hz, x sec. long, with amplitude of ca. x
+2. xxx Hz, x sec. long, with amplitude of ca. x
+3. xxx Hz, x sec. long, with amplitude of ca. x
+4. xxx Hz, x sec. long, with amplitude of ca. x
+5. xxx Hz, x sec. long, with amplitude of ca. x
+6. xxx Hz, x sec. long, with amplitude of ca. x
+7. xxx Hz, x sec. long, with amplitude of ca. x
 
 We can now try to synthesize those harmonics:
 
@@ -503,7 +504,7 @@ SynthDef(\addSynthArray, { arg freq=300, dur=0.5, mul=100, addDiv=8, partials = 
 	env = EnvGen.ar(Env.perc(0.01, dur), doneAction: 2);
 	signal = Mix.arFill(partials.size, {arg i;
 				SinOsc.ar(
-					freq * harmonics[i], 
+					freq * partials[i], 
 					0,
 					amps[i]	
 				)});
