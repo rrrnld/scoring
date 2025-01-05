@@ -179,7 +179,7 @@ As you can see, the ‘freq’ variable is used in various places in the above s
 
 ## Functions
 
-Functions are an important feature of SuperCollider and most other programming languages. They are used to encapsulate algorithms or functionality that we only want to write once, but use in different places at various times. They can be seen as a black box or a factory that takes some input, parses it, and returns some output. Just as a sophisticated coffee machine might take coffee beans and water as input, it then grounds the beans, boils the water, brews the coffee, and finally outputs a lovely drink. The key point is that you don’t need (or want) to know precisely how all this happens. It’s enough to know where to fill up the beans and water, and then how to operate the buttons of the machine (strength, number of cups, etc.). The coffee machine is a [black box] (http://en.wikipedia.org/wiki/Black_box).
+Functions are an important feature of SuperCollider and most other programming languages. They are used to encapsulate algorithms or functionality that we only want to write once, but use in different places at various times. They can be seen as a black box or a factory that takes some input, parses it, and returns some output. Just as a sophisticated coffee machine might take coffee beans and water as input, it then grounds the beans, boils the water, brews the coffee, and finally outputs a lovely drink. The key point is that you don’t need (or want) to know precisely how all this happens. It’s enough to know where to fill up the beans and water, and then how to operate the buttons of the machine (strength, number of cups, etc.). The coffee machine is a [black box](http://en.wikipedia.org/wiki/Black_box).
 
 Functions in SuperCollider are notated with curly brackets ‘{}’
 
@@ -517,7 +517,7 @@ Note that both in switch and case, the semicolon is only after the last testing 
 
 The final thing we need to learn in this chapter is looping. Looping is one of the key tricks used in programming. Say we want to generate 1000 synths at once. It would be tedious to write and evaluate 1000 lines of code one after another, but it's easy to loop one line of code 1000 times!
 
-In many programming languages this is done with a [for-loop] (http://en.wikipedia.org/wiki/For_loop):
+In many programming languages this is done with a [for-loop](http://en.wikipedia.org/wiki/For_loop):
 
 ```c
 for(int i = 0; i > 10, i++) {
